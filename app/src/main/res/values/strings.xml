@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">MyProject</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="login_userid">UserID</string>
+    <string name="login_password">password</string>
+    <string name="login_login">Login</string>
+    <string name="login_background">Background</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_information">Information</string>
+    <string name="nav_me">Me</string>
+    <string name="frag_this_is_home">This is Home</string>
+    <string name="hello_blank_fragment">blank</string>
+    <string name="this_is_user_avatar">This is user avatar.</string>
+    <string name="username">username</string>
+    <string name="this_is_book_image">This is book image.</string>
+    <string name="bookName">BookName:</string>
+
+    <string name="test123123">TEST123123</string>
+    <string name="remember_password">Remember Password</string>
+    <string name="button">Button</string>
+    <string name="testdialog">TestDialog</string>
+    <string name="testPhoto">testPhoto</string>
+    <string name="add_a_book">add a book.</string>
+
+    <string name="set_picture">Set Picture</string>
+    <string name="bookid">BookID</string>
+    <string name="input_bookid">INPUT BookID</string>
+    <string name="bookname">BookName</string>
+    <string name="input_bookname">INPUT BookName</string>
+    <string name="writer">Writer</string>
+    <string name="input_writer">INPUT Writer</string>
+    <string name="booktype">BookType</string>
+    <string name="input_booktype">Input BookType</string>
+    <string name="bookimage">BookImage</string>
+    <string name="submit">Submit</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+
+</resources>
