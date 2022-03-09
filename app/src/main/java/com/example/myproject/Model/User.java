@@ -31,6 +31,11 @@ public class User {
         this.birth = birth;
     }
 
+    public User(){
+
+    }
+
+
 
     public int getUserid() {
         return userid;

@@ -19,7 +19,7 @@ import okhttp3.logging.HttpLoggingInterceptor;
 
 public class main_Repository {
     private main_dao dao;
-    private User user;
+    private User user = new User();
 
 
 

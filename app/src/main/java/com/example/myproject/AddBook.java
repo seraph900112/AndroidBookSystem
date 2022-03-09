@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myproject.Model.Book;
@@ -28,7 +29,10 @@ import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.BufferedSink;
 
 public class AddBook extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private static final int RES_CODE = 55688;
@@ -43,6 +47,7 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener, 
     private Button submit;
     private TextView test;
     private String res;
+    public static final MediaType JSON = MediaType.get("text/html; charset=utf-8");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +77,10 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         if (v.getId() == SetPicture.getId()) {
+
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(intent, RES_CODE);
-            Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT).show();
+
         } else if (v.getId() == submit.getId()) {
 
             sendBook(new GetCallBack<String>() {
@@ -83,8 +89,6 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener, 
                     res = value;
                 }
             });
-
-
 
             Toast.makeText(this, res, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(this, MainActivity.class);
@@ -113,7 +117,7 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener, 
         }
     }
 
-    public interface GetCallBack<T> {
+    private interface GetCallBack<T> {
         void onValue(T value);
     }
 
@@ -123,22 +127,22 @@ public class AddBook extends AppCompatActivity implements View.OnClickListener, 
         String BookName = bookName.getText().toString();
         String Writer = writer.getText().toString();
         Bitmap bitmap = bookImage.getDrawingCache();
+
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
         byte[] bookPicture = bos.toByteArray();
+
         Book book = new Book(BookId, BookName, bookType, Writer, bookPicture);
         Gson gson = new GsonBuilder().create();
-        String jsonStr = gson.toJson(book);
-        String path = "http://192.168.1.103:8080/WebServer/AddBook";
-        FormBody formBody = new FormBody.Builder()
-                .add("Book", jsonStr).build();
+        String jsonStr = gson.toJson(book) ;
+        String path = okhttpHelper.serverPath + "AddBook";
+        FormBody formBody = new FormBody.Builder().add("Book", jsonStr).build();
 
         Callback callback = new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {
 
             }
-
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 String back = response.body().string();

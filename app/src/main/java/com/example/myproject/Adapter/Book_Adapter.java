@@ -2,8 +2,11 @@ package com.example.myproject.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +18,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myproject.Model.Book;
 import com.example.myproject.R;
+import com.example.myproject.ViewModel.fragment_home_ViewModel;
+import com.example.myproject.book_dialog;
 
 import java.util.List;
 
 public class Book_Adapter extends RecyclerView.Adapter<Book_Adapter.ViewHolder> {
-    private final LayoutInflater inflater;
-    private List<Book> bookList;
+    private LayoutInflater inflater;
+    public List<Book> bookList;
+    private fragment_home_ViewModel viewModel;
 
-    public Book_Adapter(Context context) {
+
+    public Book_Adapter(Context context, fragment_home_ViewModel viewModel) {
         inflater = LayoutInflater.from(context);
+        this.viewModel = viewModel;
+    }
+
+    public Book_Adapter() {
+
     }
 
     @NonNull
@@ -57,7 +69,9 @@ public class Book_Adapter extends RecyclerView.Adapter<Book_Adapter.ViewHolder> 
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+
+
+    class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public final TextView BookName;
         public final TextView Writer;
         public final ImageView BookPicture;
@@ -69,8 +83,27 @@ public class Book_Adapter extends RecyclerView.Adapter<Book_Adapter.ViewHolder> 
             Writer = itemView.findViewById(R.id.Writer);
             BookPicture = itemView.findViewById(R.id.BookPIC);
             this.adapter = adapter;
+            itemView.setOnClickListener(this);
+
         }
 
+        @Override
+        public void onClick(View v) {
+            int pos = getLayoutPosition();
+            book_dialog book_dialog = new book_dialog(v.getContext(), pos, viewModel ,bookList);
+            book_dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+            book_dialog.show();
+            book_dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialog) {
+                    notifyDataSetChanged();
+                }
+            });
 
+        }
     }
+
+
 }
+
+

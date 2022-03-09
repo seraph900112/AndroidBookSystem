@@ -1,6 +1,7 @@
 package com.example.myproject;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public abstract class Project_DataBase extends RoomDatabase {
                         .addCallback(initDB)
                         .build();
             }
+
         }
         return INSTANCE;
     }

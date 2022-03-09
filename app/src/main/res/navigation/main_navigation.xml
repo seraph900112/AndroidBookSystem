@@ -10,6 +10,9 @@
         android:label="Home"
         tools:layout="@layout/fragment_nav_home" >
 
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_bookInfo"
+            app:destination="@id/navigation_bookInfo" />
     </fragment>
 
 
@@ -24,5 +27,11 @@
         android:name="com.example.myproject.Fragment_nav_me"
         android:label="Me"
         tools:layout="@layout/fragment_nav_me"/>
+
+    <fragment
+        android:id="@+id/navigation_bookInfo"
+        android:name="com.example.myproject.Fragment_getBookInfo"
+        android:label="Me"
+        tools:layout="@layout/fragment_get_book_info"/>
 
 </navigation>
